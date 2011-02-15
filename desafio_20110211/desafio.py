@@ -35,7 +35,30 @@ class Desafio1(unittest.TestCase):
         sampleList = ['a','a','a','a','b','c','c','a','a','d','e','e','e','e']
         self.assertEqual([['a','a','a','a'],['b'],['c','c'],['a','a'],['d'],['e','e','e','e']],
                     pack(sampleList))
+    def test_pack_duplicates2(self):
+        sampleList = ['a','b','c','c','a','a','d','e','e','e']
+        self.assertEqual([['a'],['b'],['c','c'],['a','a'],['d'],['e','e','e']],
+                    pack(sampleList))
+    def test_pack_zero(self):
+        sampleList = []
+        self.assertEqual([],
+                    pack(sampleList))
 
+
+def pack(list):
+	char = '' if(not list) else list[0]
+	result = []
+	inic = fim = 0 #Inicio e o fim de cada sub Lista
+
+	for elem in list[1:]:
+		fim += 1
+		if(char != elem):
+			result.append(list[inic:fim])
+			char = elem
+			inic = fim
+	if(list):
+		result.append(list[inic:])
+	return result
 
 if __name__ == '__main__':
     unittest.main()    
