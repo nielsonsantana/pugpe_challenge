@@ -30,22 +30,38 @@ import unittest
 
 
 class Desafio1(unittest.TestCase):
+	def test_pack_duplicates(self):
+		sampleList = ['a','a','a','a','b','c','c','a','a','d','e','e','e','e']
+		self.assertEqual([['a','a','a','a'],['b'],['c','c'],['a','a'],['d'],['e','e','e','e']],
+					pack(sampleList))
+	def test_pack_duplicates2(self):
+		sampleList = ['a','b','c','c','a','a','d','e','e','a']
+		self.assertEqual([['a'],['b'],['c','c'],['a','a'],['d'],['e','e'],['a']],
+					pack(sampleList))
+	def test_pack_zero(self):
+		sampleList = []
+		self.assertEqual([],
+					pack(sampleList))
+	def test_lista_um_elemento(self):
+		self.assertEquals([[1]], pack([1]))
+	def test_lista_dois_elementos_iguais(self):
+		self.assertEquals([[1, 1]], pack([1, 1]))
 
-    def test_pack_duplicates(self):
-        sampleList = ['a','a','a','a','b','c','c','a','a','d','e','e','e','e']
-        self.assertEqual([['a','a','a','a'],['b'],['c','c'],['a','a'],['d'],['e','e','e','e']],
-                    pack(sampleList))
-    def test_pack_duplicates2(self):
-        sampleList = ['a','b','c','c','a','a','d','e','e','e']
-        self.assertEqual([['a'],['b'],['c','c'],['a','a'],['d'],['e','e','e']],
-                    pack(sampleList))
-    def test_pack_zero(self):
-        sampleList = []
-        self.assertEqual([],
-                    pack(sampleList))
 
-
+#Minha funcao para a competicao
 def pack(list):
+	result = []
+	inic = 0 #Inicio de cada sub Lista
+	list.append(0)
+
+	for fim, elem in enumerate(list[1:]):
+		if list[fim] != elem:
+			result.append(list[inic:fim+1])
+			inic = fim+1
+	return result
+
+
+def pack1(list):
 	char = '' if(not list) else list[0]
 	result = []
 	inic = fim = 0 #Inicio e o fim de cada sub Lista
@@ -59,6 +75,7 @@ def pack(list):
 	if(list):
 		result.append(list[inic:])
 	return result
+
 
 if __name__ == '__main__':
     unittest.main()    
