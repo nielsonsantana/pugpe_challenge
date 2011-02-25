@@ -111,5 +111,27 @@ class Desafio2(unittest.TestCase):
         sp.sort()
         self.assertEqual([ ('A','B','D'),('A','C','D')],sp)
 
+visited={}; paths = []; min_dist = 0; graph = {}; 
+
+def short_path(dicio, start, end):
+	global graph, min_dist, paths
+	graph = dicio; paths = []
+	
+	if not start in dicio.keys() or not end in dicio.keys(): return None
+	
+	DFS_Recursive([start], start, end)
+	return filter(lambda x: len(x) == min_dist and x[-1]==end, paths)
+
+def DFS_Recursive(path, start, end): 
+	global min_dist
+	if(start == end):
+		if not min_dist or len(path) <= min_dist:
+			min_dist = len(path)
+			paths.append(tuple(path))
+		return
+	for v in graph[start]:
+		if(v not in path):
+			DFS_Recursive(path+[v], v, end)
+
 if __name__ == '__main__':
     unittest.main()    
