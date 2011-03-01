@@ -47,7 +47,7 @@ def tuplify1(lista,n):
 import unittest
 
 
-class Desafio2(unittest.TestCase):
+class Desafio1(unittest.TestCase):
 
     def test_empty_list(self):
         self.assertEqual(None,
