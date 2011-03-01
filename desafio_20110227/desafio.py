@@ -31,6 +31,19 @@ O objetivo deste problema eh converter uma lista de elementos em uma lista de tu
 
 """
 
+
+#Solucao Pythonica
+def tuplify(lista,n):
+    return zip(*[iter(lista,)]*n) or None
+
+
+#Solucao criativa
+def tuplify1(lista,n):
+    retorno = []
+    for i in xrange(1,len(lista),n):
+	retorno.append(tuple(lista[i-1:i+1]))
+    return retorno or None
+
 import unittest
 
 
@@ -38,19 +51,38 @@ class Desafio2(unittest.TestCase):
 
     def test_empty_list(self):
         self.assertEqual(None,
-                    tuplify([]))
+                    tuplify([],2))
 
     def test_unit_list(self):
-        self.assertEqual(None, tuplify([1]))
+        self.assertEqual(None, tuplify([1],2))
 
     def test_simple_List(self):
-        self.assertEqual([(1,2)], tuplify([1,2]))
+        self.assertEqual([(1,2)], tuplify([1,2],2))
 
     def test_complex_list(self):    
-        self.assertEqual([('x',1),('y',2)], tuplify(['x',1,'y',2]))
+        self.assertEqual([('x',1),('y',2)], tuplify(['x',1,'y',2],2))
 
     def test_incomplete_list(self):
-        self.assertEqual([(1,2)], tuplify([1,2,3]))
+        self.assertEqual([(1,2)], tuplify([1,2,3],2))
+
+
+class Desafio2(unittest.TestCase):
+
+    def test_empty_list(self):
+        self.assertEqual(None,
+                    tuplify1([],2))
+
+    def test_unit_list(self):
+        self.assertEqual(None, tuplify1([1],2))
+
+    def test_simple_List(self):
+        self.assertEqual([(1,2)], tuplify1([1,2],2))
+
+    def test_complex_list(self):    
+        self.assertEqual([('x',1),('y',2)], tuplify1(['x',1,'y',2],2))
+
+    def test_incomplete_list(self):
+        self.assertEqual([(1,2)], tuplify1([1,2,3],2))
 
 if __name__ == '__main__':
-    unittest.main()    
+    unittest.main()  
