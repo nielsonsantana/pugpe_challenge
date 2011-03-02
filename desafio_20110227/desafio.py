@@ -33,15 +33,15 @@ O objetivo deste problema eh converter uma lista de elementos em uma lista de tu
 
 
 #Solucao Pythonica
-def tuplify(lista,n):
+def tuplify(lista,n=2):
     return zip(*[iter(lista,)]*n) or None
 
 
 #Solucao criativa
-def tuplify1(lista,n):
+def tuplify1(lista,n=2):
     retorno = []
-    for i in xrange(1,len(lista),n):
-	retorno.append(tuple(lista[i-1:i+1]))
+    for i in xrange(n-1,len(lista),n):
+	retorno.append(tuple(lista[i-(n-1):i+1]))
     return retorno or None
 
 import unittest
@@ -51,38 +51,38 @@ class Desafio1(unittest.TestCase):
 
     def test_empty_list(self):
         self.assertEqual(None,
-                    tuplify([],2))
+                    tuplify([]))
 
     def test_unit_list(self):
-        self.assertEqual(None, tuplify([1],2))
+        self.assertEqual(None, tuplify([1]))
 
     def test_simple_List(self):
-        self.assertEqual([(1,2)], tuplify([1,2],2))
+        self.assertEqual([(1,2)], tuplify([1,2]))
 
     def test_complex_list(self):    
-        self.assertEqual([('x',1),('y',2)], tuplify(['x',1,'y',2],2))
+        self.assertEqual([('x',1),('y',2)], tuplify(['x',1,'y',2]))
 
     def test_incomplete_list(self):
-        self.assertEqual([(1,2)], tuplify([1,2,3],2))
+        self.assertEqual([(1,2)], tuplify([1,2,3]))
 
 
 class Desafio2(unittest.TestCase):
 
     def test_empty_list(self):
         self.assertEqual(None,
-                    tuplify1([],2))
+                    tuplify1([]))
 
     def test_unit_list(self):
-        self.assertEqual(None, tuplify1([1],2))
+        self.assertEqual(None, tuplify1([1],3))
 
     def test_simple_List(self):
-        self.assertEqual([(1,2)], tuplify1([1,2],2))
+        self.assertEqual([(1,2)], tuplify1([1,2]))
 
     def test_complex_list(self):    
-        self.assertEqual([('x',1),('y',2)], tuplify1(['x',1,'y',2],2))
+        self.assertEqual([('x',1),('y',2)], tuplify1(['x',1,'y',2]))
 
     def test_incomplete_list(self):
-        self.assertEqual([(1,2)], tuplify1([1,2,3],2))
+        self.assertEqual([(1,2)], tuplify1([1,2,3]))
 
 if __name__ == '__main__':
     unittest.main()  
