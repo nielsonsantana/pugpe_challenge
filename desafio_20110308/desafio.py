@@ -23,10 +23,10 @@ O objetivo deste problema eh transpor uma matriz.
     []
     >>> ret = tranpose([[1]])
     >>> ret
-    [1]
+    [[1]]
     >>> ret = transpose([[1,2]])  
     >>> ret
-    [[1],[2]]
+    [[1], [2]]
     >>> ret = transpose([[1,2], [3,4], [5,6]])
     >>> ret
     [[1,3,5], [2,4,6]]
@@ -35,7 +35,7 @@ O objetivo deste problema eh transpor uma matriz.
 
 """
 
-
+transpose = lambda l: reduce(lambda x,y: x+[list(y)],zip(*l),[])
 
 import unittest
 
@@ -47,7 +47,7 @@ class Desafio4(unittest.TestCase):
                     transpose([]))
 
     def test_unit_list(self):
-        self.assertEqual([1], transpose([[1]]))
+        self.assertEqual([[1]], transpose([[1]]))
 
     def test_simple_List(self):
         self.assertEqual([[1],[2]], transpose([[1,2]]))
